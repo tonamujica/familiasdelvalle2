@@ -1,13 +1,6 @@
 <!doctype html>
 <html lang="en">
     <head>
-		<script>
-  			const activar = false;
-				if (!activar) {
-					document.write("<h1 style='text-align:center;margin-top:20%;font-family:sans-serif;'>Mapa temporalmente no disponible</h1>");
-				}
-		</script>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
@@ -28,6 +21,28 @@
         }
         </style>
         <title></title>
+		<script>
+		  const activar = false;
+		  if (!activar) {
+		    document.addEventListener("DOMContentLoaded", function () {
+		      document.body.innerHTML = `
+		        <div style="
+		          display:flex;
+		          justify-content:center;
+		          align-items:center;
+		          height:100vh;
+		          margin:0;
+		          font-family:sans-serif;
+		          text-align:center;
+		          font-size:32px;
+		          font-weight:bold;
+		        ">
+		          Mapa temporalmente no disponible
+		        </div>
+		      `;
+		    });
+		  }
+		</script>
     </head>
     <body>
         <div id="map">
