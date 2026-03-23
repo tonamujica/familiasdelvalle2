@@ -1,5 +1,4 @@
 <!doctype html>
-<!-- redeploy -->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -23,7 +22,6 @@
         </style>
         <title></title>
     </head>
-	
     <body>
         <div id="map">
         </div>
@@ -39,13 +37,13 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet.photon.js"></script>
-        <script src="data/area_1.js"></script>
+        <script src="data/area_corregida_1.js"></script>
         <script src="data/poligonos_2.js"></script>
         <script src="data/familias_web_links_3.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[19.38054800801432,-99.17883089981271],[19.403783648050485,-99.13515678503545]]);
+        }).fitBounds([[19.37787865872446,-99.1794353672015],[19.401114679758706,-99.13569990892194]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -130,13 +128,13 @@
         });
         layer_OpenStreetMap_0;
         map.addLayer(layer_OpenStreetMap_0);
-        function pop_area_1(feature, layer) {
+        function pop_area_corregida_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(String(feature.properties['fid']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['area'] !== null ? autolinker.link(String(feature.properties['area']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['area_corregida'] !== null ? autolinker.link(String(feature.properties['area_corregida']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -146,33 +144,33 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_area_1_0() {
+        function style_area_corregida_1_0() {
             return {
-                pane: 'pane_area_1',
+                pane: 'pane_area_corregida_1',
                 opacity: 1,
                 color: 'rgba(53,121,177,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 2.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
         }
-        map.createPane('pane_area_1');
-        map.getPane('pane_area_1').style.zIndex = 401;
-        map.getPane('pane_area_1').style['mix-blend-mode'] = 'normal';
-        var layer_area_1 = new L.geoJson(json_area_1, {
+        map.createPane('pane_area_corregida_1');
+        map.getPane('pane_area_corregida_1').style.zIndex = 401;
+        map.getPane('pane_area_corregida_1').style['mix-blend-mode'] = 'normal';
+        var layer_area_corregida_1 = new L.geoJson(json_area_corregida_1, {
             attribution: '',
-            interactive: false,
-            dataVar: 'json_area_1',
-            layerName: 'layer_area_1',
-            pane: 'pane_area_1',
-            onEachFeature: pop_area_1,
-            style: style_area_1_0,
+            interactive: true,
+            dataVar: 'json_area_corregida_1',
+            layerName: 'layer_area_corregida_1',
+            pane: 'pane_area_corregida_1',
+            onEachFeature: pop_area_corregida_1,
+            style: style_area_corregida_1_0,
         });
-        bounds_group.addLayer(layer_area_1);
-        map.addLayer(layer_area_1);
+        bounds_group.addLayer(layer_area_corregida_1);
+        map.addLayer(layer_area_corregida_1);
         function pop_poligonos_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -206,7 +204,7 @@
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 2.0,
                 fillOpacity: 0,
                 interactive: false,
             }
@@ -284,9 +282,9 @@
                 case 'N':
                     return {
                 pane: 'pane_familias_web_links_3',
-                radius: 6.0,
+                radius: 20.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -300,9 +298,9 @@
                 case 'Y':
                     return {
                 pane: 'pane_familias_web_links_3',
-                radius: 6.0,
+                radius: 20.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
