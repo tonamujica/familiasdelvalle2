@@ -38,12 +38,12 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet.photon.js"></script>
         <script src="data/area_corregida_1.js"></script>
-        <script src="data/poligonos_2.js"></script>
-        <script src="data/familias_web_links_3.js"></script>
+        <script src="data/clusters_2.js"></script>
+        <script src="data/poligonos_3.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[19.370115119317123,-99.1980934601192],[19.416586059937437,-99.11062254356005]]);
+        }).fitBounds([[19.3851599147794,-99.1799962205899],[19.4083948964363,-99.13626076231033]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -171,59 +171,7 @@
         });
         bounds_group.addLayer(layer_area_corregida_1);
         map.addLayer(layer_area_corregida_1);
-        function pop_poligonos_2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(String(feature.properties['fid']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(String(feature.properties['id']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CLUSTER_ID'] !== null ? autolinker.link(String(feature.properties['CLUSTER_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['area'] !== null ? autolinker.link(String(feature.properties['area']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['perimeter'] !== null ? autolinker.link(String(feature.properties['perimeter']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_poligonos_2_0() {
-            return {
-                pane: 'pane_poligonos_2',
-                opacity: 1,
-                color: 'rgba(0,0,0,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_poligonos_2');
-        map.getPane('pane_poligonos_2').style.zIndex = 402;
-        map.getPane('pane_poligonos_2').style['mix-blend-mode'] = 'normal';
-        var layer_poligonos_2 = new L.geoJson(json_poligonos_2, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_poligonos_2',
-            layerName: 'layer_poligonos_2',
-            pane: 'pane_poligonos_2',
-            onEachFeature: pop_poligonos_2,
-            style: style_poligonos_2_0,
-        });
-        bounds_group.addLayer(layer_poligonos_2);
-        map.addLayer(layer_poligonos_2);
-        function pop_familias_web_links_3(feature, layer) {
+        function pop_clusters_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Nombre de la familia</th>\
@@ -261,27 +209,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_familias_web_links_3_0(feature) {
+        function style_clusters_2_0(feature) {
             switch(String(feature.properties['Identificado'])) {
-                default:
-                    return {
-                pane: 'pane_familias_web_links_3',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(64,155,229,1.0)',
-                interactive: true,
-            }
-                    break;
                 case 'N':
                     return {
-                pane: 'pane_familias_web_links_3',
+                pane: 'pane_clusters_2',
                 radius: 16.0,
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
@@ -297,7 +229,7 @@
                     break;
                 case 'Y':
                     return {
-                pane: 'pane_familias_web_links_3',
+                pane: 'pane_clusters_2',
                 radius: 16.0,
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
@@ -311,51 +243,119 @@
                 interactive: true,
             }
                     break;
+                default:
+                    return {
+                pane: 'pane_clusters_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(76,102,217,1.0)',
+                interactive: true,
+            }
+                    break;
             }
         }
-        map.createPane('pane_familias_web_links_3');
-        map.getPane('pane_familias_web_links_3').style.zIndex = 403;
-        map.getPane('pane_familias_web_links_3').style['mix-blend-mode'] = 'normal';
-        var layer_familias_web_links_3 = new L.geoJson(json_familias_web_links_3, {
+        map.createPane('pane_clusters_2');
+        map.getPane('pane_clusters_2').style.zIndex = 402;
+        map.getPane('pane_clusters_2').style['mix-blend-mode'] = 'normal';
+        var layer_clusters_2 = new L.geoJson(json_clusters_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_familias_web_links_3',
-            layerName: 'layer_familias_web_links_3',
-            pane: 'pane_familias_web_links_3',
-            onEachFeature: pop_familias_web_links_3,
+            dataVar: 'json_clusters_2',
+            layerName: 'layer_clusters_2',
+            pane: 'pane_clusters_2',
+            onEachFeature: pop_clusters_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_familias_web_links_3_0(feature));
+                return L.circleMarker(latlng, style_clusters_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_familias_web_links_3);
-        map.addLayer(layer_familias_web_links_3);
+        bounds_group.addLayer(layer_clusters_2);
+        map.addLayer(layer_clusters_2);
+        function pop_poligonos_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(String(feature.properties['fid']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(String(feature.properties['id']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CLUSTER_ID'] !== null ? autolinker.link(String(feature.properties['CLUSTER_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['area'] !== null ? autolinker.link(String(feature.properties['area']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['perimeter'] !== null ? autolinker.link(String(feature.properties['perimeter']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_poligonos_3_0() {
+            return {
+                pane: 'pane_poligonos_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_poligonos_3');
+        map.getPane('pane_poligonos_3').style.zIndex = 403;
+        map.getPane('pane_poligonos_3').style['mix-blend-mode'] = 'normal';
+        var layer_poligonos_3 = new L.geoJson(json_poligonos_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_poligonos_3',
+            layerName: 'layer_poligonos_3',
+            pane: 'pane_poligonos_3',
+            onEachFeature: pop_poligonos_3,
+            style: style_poligonos_3_0,
+        });
+        bounds_group.addLayer(layer_poligonos_3);
+        map.addLayer(layer_poligonos_3);
         setBounds();
         var i = 0;
-        layer_poligonos_2.eachLayer(function(layer) {
+        layer_poligonos_3.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['CLUSTER_ID'] !== null?String('<div style="color: #323232; font-size: 20pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['CLUSTER_ID']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_poligonos_2'});
+            layer.bindTooltip((layer.feature.properties['CLUSTER_ID'] !== null?String('<div style="color: #323232; font-size: 20pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['CLUSTER_ID']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_poligonos_3'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_poligonos_2]);
+        resetLabels([layer_poligonos_3]);
         map.on("zoomend", function(){
-            resetLabels([layer_poligonos_2]);
+            resetLabels([layer_poligonos_3]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_poligonos_2]);
+            resetLabels([layer_poligonos_3]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_poligonos_2]);
+            resetLabels([layer_poligonos_3]);
         });
         </script>        
     </body>
